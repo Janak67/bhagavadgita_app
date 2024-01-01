@@ -51,9 +51,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                 ),
-                Scrollbar(
-                  child: SizedBox(
-                    height: MediaQuery.sizeOf(context).height * 0.6,
+                Expanded(
+                  child: Scrollbar(
                     child: ListView.builder(
                       itemCount: providerw!.homeList.length,
                       itemBuilder: (context, index) {

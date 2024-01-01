@@ -13,8 +13,13 @@ class DetailsScreen extends StatefulWidget {
 }
 
 class _DetailsScreenState extends State<DetailsScreen> {
+  DetailsProvider? providerr;
+  DetailsProvider? providerw;
+
   @override
   Widget build(BuildContext context) {
+    providerw = context.watch<DetailsProvider>();
+    providerr = context.read<DetailsProvider>();
     HomeModel l1 = ModalRoute.of(context)!.settings.arguments as HomeModel;
     return SafeArea(
       child: Scaffold(
@@ -102,11 +107,14 @@ class _DetailsScreenState extends State<DetailsScreen> {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: Image.asset(
-                        'assets/img/bhagavadgita.jpg',
-                        height: MediaQuery.sizeOf(context).height * 0.3,
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.asset(
+                          'assets/img/bhagavadgita.jpg',
+                          height: MediaQuery.sizeOf(context).height * 0.3,
+                        ),
                       ),
                     ),
                     const SizedBox(height: 10),
@@ -119,40 +127,23 @@ class _DetailsScreenState extends State<DetailsScreen> {
                       padding: const EdgeInsets.all(10),
                       child: Column(
                         children: [
-                          SelectableText(
+                          Text(
                             l1.shloka,
                             style: Theme.of(context).textTheme.titleLarge,
-                            enableInteractiveSelection: true,
-                            contextMenuBuilder: (context, editableTextState) {
-                              return PopupMenuButton(
-                                itemBuilder: (context) {
-                                  return [
-                                    const PopupMenuItem(
-                                      value: 'copy',
-                                      child: Text('Copy'),
-                                    ),
-                                    const PopupMenuItem(
-                                      value: 'select',
-                                      child: Text('Select'),
-                                    ),
-                                  ];
-                                },
-                                onSelected: (value) {
-                                  if (value == 'copy') {
-                                  } else if (value == 'select') {}
-                                },
-                              );
-                            },
                           ),
                           const SizedBox(height: 30),
-                          Text(l1.meaning,
-                              style: Theme.of(context).textTheme.titleMedium),
-                          const SizedBox(height: 30),
-                          Text(l1.hindi,
-                              style: Theme.of(context).textTheme.titleMedium),
-                          const SizedBox(height: 30),
-                          Text(l1.english,
-                              style: Theme.of(context).textTheme.titleMedium),
+                          providerr!.language == 'Gujarati'
+                              ? Text(l1.meaning,
+                                  style:
+                                      Theme.of(context).textTheme.titleMedium)
+                              : providerr!.language == 'Hindi'
+                                  ? Text(l1.hindi,
+                                      style: Theme.of(context)
+                                          .textTheme.titleMedium)
+                                  : Text(l1.english,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleMedium)
                         ],
                       ),
                     ),
