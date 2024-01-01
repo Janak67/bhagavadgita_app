@@ -26,7 +26,11 @@ class _DetailsScreenState extends State<DetailsScreen> {
         appBar: AppBar(
           centerTitle: true,
           backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
-          title: Text(l1.name),
+          title: providerr!.language == 'Gujarati'
+              ? Text(l1.nameModel!.gujarati)
+              : providerr!.language == 'Hindi'
+                  ? Text(l1.nameModel!.hindi)
+                  : Text(l1.nameModel!.english),
           actions: [
             PopupMenuButton(
               itemBuilder: (context) {
@@ -139,7 +143,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
                               : providerr!.language == 'Hindi'
                                   ? Text(l1.hindi,
                                       style: Theme.of(context)
-                                          .textTheme.titleMedium)
+                                          .textTheme
+                                          .titleMedium)
                                   : Text(l1.english,
                                       style: Theme.of(context)
                                           .textTheme

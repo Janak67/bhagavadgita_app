@@ -1,3 +1,4 @@
+import 'package:bhagavadgita_app/screen/details/provider/details_provider.dart';
 import 'package:bhagavadgita_app/screen/home/model/home_model.dart';
 import 'package:bhagavadgita_app/screen/home/provider/home_provider.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   HomeProvider? providerr;
   HomeProvider? providerw;
+  DetailsProvider? providerR;
 
   @override
   void initState() {
@@ -25,6 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     providerw = context.watch<HomeProvider>();
     providerr = context.read<HomeProvider>();
+    providerR = context.read<DetailsProvider>();
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -68,13 +71,39 @@ class _HomeScreenState extends State<HomeScreen> {
                               height: 70,
                               alignment: Alignment.center,
                               child: ListTile(
-                                leading: Text('${bhagavadGitaList.title}   -',
-                                    style:
-                                        Theme.of(context).textTheme.titleSmall),
-                                title: Text(bhagavadGitaList.name,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .titleMedium),
+                                leading: providerR!.language == 'Gujarati'
+                                    ? Text(
+                                        "${bhagavadGitaList.titleModel!.titleG}   -",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleSmall)
+                                    : providerR!.language == 'Hindi'
+                                        ? Text(
+                                            "${bhagavadGitaList.titleModel!.titleH}   -",
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .titleSmall)
+                                        : Text(
+                                            "${bhagavadGitaList.titleModel!.titleE}   -",
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .titleSmall),
+                                title: providerR!.language == 'Gujarati'
+                                    ? Text(bhagavadGitaList.nameModel!.gujarati,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleMedium)
+                                    : providerR!.language == 'Hindi'
+                                        ? Text(
+                                            bhagavadGitaList.nameModel!.hindi,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .titleMedium)
+                                        : Text(
+                                            bhagavadGitaList.nameModel!.english,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .titleMedium),
                                 trailing: const Icon(
                                   Icons.arrow_forward_ios,
                                   size: 15,
