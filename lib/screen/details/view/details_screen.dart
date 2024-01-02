@@ -115,9 +115,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
                       padding: const EdgeInsets.all(8.0),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(10),
-                        child: Image.asset(
-                          'assets/img/bhagavadgita.jpg',
-                          height: MediaQuery.sizeOf(context).height * 0.3,
+                        child: Image.network(
+                          l1.image,
+                          fit: BoxFit.fill,
                         ),
                       ),
                     ),

@@ -3,7 +3,7 @@ import 'package:bhagavadgita_app/screen/home/model/title_model.dart';
 
 class HomeModel {
   final int id;
-  final String hindi, meaning, english, shloka;
+  final String hindi, meaning, english, shloka, image;
   NameModel? nameModel;
   TitleModel? titleModel;
 
@@ -13,6 +13,7 @@ class HomeModel {
       required this.meaning,
       required this.english,
       required this.shloka,
+      required this.image,
       required this.nameModel,
       required this.titleModel});
 
@@ -23,6 +24,7 @@ class HomeModel {
       meaning: m1['meaning'],
       english: m1['english'],
       shloka: m1['shloka'],
+      image: m1['image'],
       nameModel: NameModel.mapToModel(m1['name']),
       titleModel: TitleModel.mapToModel(m1['title']),
     );
