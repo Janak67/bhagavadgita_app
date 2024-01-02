@@ -131,10 +131,31 @@ class _DetailsScreenState extends State<DetailsScreen> {
                       padding: const EdgeInsets.all(10),
                       child: Column(
                         children: [
-                          Text(
-                            l1.shloka,
-                            style: Theme.of(context).textTheme.titleLarge,
-                          ),
+                          providerr!.language == 'Gujarati'
+                              ? Text('${l1.shlokaModel!.shlokaGujarati}',
+                                  style: Theme.of(context).textTheme.titleLarge)
+                              : providerr!.language == 'Hindi'
+                                  ? Text('${l1.shlokaModel!.shlokaHindi}',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleLarge)
+                                  : Text('${l1.shlokaModel!.shlokaEnglish}',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleMedium),
+                          const SizedBox(height: 30),
+                          providerr!.language == 'Gujarati'
+                              ? Text(l1.titleModel!.titleG,
+                                  style: Theme.of(context).textTheme.titleSmall)
+                              : providerr!.language == 'Hindi'
+                                  ? Text(l1.titleModel!.titleH,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleSmall)
+                                  : Text(l1.titleModel!.titleE,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleSmall),
                           const SizedBox(height: 30),
                           providerr!.language == 'Gujarati'
                               ? Text(l1.meaning,
